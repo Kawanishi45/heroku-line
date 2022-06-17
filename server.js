@@ -47,3 +47,23 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`listening on ${port}`);
 });
+
+// register a webhook handler with middleware
+// about the middleware, please refer to doc
+app.post('/test', () => {
+    broadcast();
+});
+
+const broadcast = async () => {
+    const messages = [{
+        type: 'text',
+        text: 'いっせい送信です！'
+    }];
+
+    try {
+        const res = await client.broadcast(messages);
+        console.log(res);
+    } catch (err) {
+        console.error(err);
+    }
+}
