@@ -51,7 +51,7 @@ app.listen(port, () => {
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
 app.post('/test', (req, res) => {
-    console.log(req.body.name);
+    console.log(req.body);
     broadcast();
     res.send('POST requested to test');
 });
@@ -59,7 +59,7 @@ app.post('/test', (req, res) => {
 const broadcast = async () => {
     const messages = [{
         type: 'text',
-        text: 'いっせい送信です！'
+        text: '送信です！'
     }];
 
     try {
