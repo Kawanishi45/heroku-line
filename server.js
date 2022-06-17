@@ -17,11 +17,26 @@ const client = new line.Client(config);
 // about Express itself: https://expressjs.com/
 const app = express();
 
+// CORS対策
+app.use(allowCrossDomain);
 // urlencodedとjsonは別々に初期化する
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+
+const allowCrossDomain = (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' === req.method) {
+        res.send(200);
+    } else {
+        next();
+    }
+}
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
@@ -58,9 +73,6 @@ app.listen(port, () => {
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
 app.post('/test', (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
     console.log(req.body);
     if (req.body.messageText) {
         broadcast(req.body.messageText);
