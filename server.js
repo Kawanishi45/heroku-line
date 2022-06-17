@@ -61,6 +61,7 @@ app.post('/test', (req, res) => {
     console.log(req.body);
     if (req.body.messageText) {
         broadcast(req.body.messageText);
+        res.setHeader('Access-Control-Allow-Origin: *')
         res.send('POST requested to test');
     } else {
         res.send('error: Not exist messageText');
