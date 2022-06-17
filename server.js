@@ -58,10 +58,10 @@ app.listen(port, () => {
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
 app.post('/test', (req, res) => {
+    app.setHeader('Access-Control-Allow-Origin: *')
     console.log(req.body);
     if (req.body.messageText) {
         broadcast(req.body.messageText);
-        res.setHeader('Access-Control-Allow-Origin: *')
         res.send('POST requested to test');
     } else {
         res.send('error: Not exist messageText');
