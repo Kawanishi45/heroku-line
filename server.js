@@ -59,14 +59,18 @@ app.listen(port, () => {
 // about the middleware, please refer to doc
 app.post('/test', (req, res) => {
     console.log(req.body);
-    broadcast();
-    res.send('POST requested to test');
+    if (req.body.messageText) {
+        broadcast(req.body.messageText);
+        res.send('POST requested to test');
+    } else {
+        res.send('error: Not exist messageText');
+    }
 });
 
-const broadcast = async () => {
+const broadcast = async (messageText) => {
     const messages = [{
         type: 'text',
-        text: '送信です！'
+        text: messageText
     }];
 
     try {
