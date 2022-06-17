@@ -16,6 +16,7 @@ const client = new line.Client(config);
 // create Express app
 // about Express itself: https://expressjs.com/
 const app = express();
+app.setHeader('Access-Control-Allow-Origin: *')
 
 // urlencodedとjsonは別々に初期化する
 app.use(bodyParser.urlencoded({
@@ -58,7 +59,6 @@ app.listen(port, () => {
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
 app.post('/test', (req, res) => {
-    app.setHeader('Access-Control-Allow-Origin: *')
     console.log(req.body);
     if (req.body.messageText) {
         broadcast(req.body.messageText);
