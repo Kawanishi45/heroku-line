@@ -17,8 +17,6 @@ const client = new line.Client(config);
 // about Express itself: https://expressjs.com/
 const app = express();
 
-// CORS対策
-app.use(allowCrossDomain);
 // urlencodedとjsonは別々に初期化する
 app.use(bodyParser.urlencoded({
     extended: true
@@ -37,6 +35,9 @@ const allowCrossDomain = (req, res, next) => {
         next();
     }
 }
+
+// CORS対策
+app.use(allowCrossDomain);
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
