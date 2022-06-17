@@ -50,7 +50,9 @@ app.listen(port, () => {
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
-app.post('/test', () => {
+app.post('/test', (req, res) => {
+    console.log(req.body);
+    console.log(res.body);
     broadcast();
 });
 
