@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>タイマー</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<form name="timer">
+    <input id="minutes" type="text" value="">分
+    <input id="seconds" type="text" value="">秒<br>
+    <input id="countStartButton" type="button" value="スタート" onclick="cntStart()">
+    <input id="countStopButton" type="button" value="ストップ" onclick="cntStop()">
+    <p>起きられなかった時のメッセージ</p>
+    <input id="messageTextInput" type="text" value="">
+    <input id="alarmStopButton" type="button" value="アラームストップ" onclick="alarmStop()" disabled>
+    <p id="alarmCountDown"></p>
+</form>
+<script src="main.js"></script>
+</body>
+</html>

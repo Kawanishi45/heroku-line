@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+// CORS対策
 const allowCrossDomain = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -35,8 +36,6 @@ const allowCrossDomain = (req, res, next) => {
         next();
     }
 }
-
-// CORS対策
 app.use(allowCrossDomain);
 
 // register a webhook handler with middleware
